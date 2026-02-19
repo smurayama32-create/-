@@ -356,12 +356,9 @@
   const freeTime = freeTimePerDay * workDays;
   const repeatRevenue = monthlySales * 0.8;
   const estimatedFatigue = fatigueLevel * 0.5;
-  
   // 新たに追加：カルテ枚数×30％×10,000
   const productRevenue = medicalCases * 0.3 * 10000;
-  
   const totalRevenue = monthlySales + repeatRevenue + productRevenue;
-
   document.getElementById('monthly-sales').textContent = monthlySales.toLocaleString();
   document.getElementById('free-time').textContent = freeTime.toFixed(0);
   document.getElementById('repeat-revenue').textContent = repeatRevenue.toLocaleString();

@@ -254,6 +254,11 @@
           <label for="fatigue-level">現在の疲労度(1〜10)</label>
           <input type="number" id="fatigue-level" value="9" min="1" max="10">
         </div>
+
+        <div class="form-group">
+    　　　<label for="medical-cases">カルテ枚数</label>
+    　　　<input type="number" id="medical-cases" value="100" min="1" max="1000">
+ 　　　  </div>
         
         <p class="note">※仮の数値が入力されていますのであなたのリアルな数字を入力してください。</p>
         
@@ -282,9 +287,9 @@
         </div>
 
         <div class="result-item">
-          <strong>③物販サブスク</strong>
-          <div class="result-value">¥34,800</div>
-          <div class="result-description">ホームケア商品（ジェル・シートマスク）</div>
+          <strong>③物販売上げ（サブスク）</strong>
+          <div class="result-value">¥<span id="product-revenue">300,000</span></div>
+          <div class="result-description">カルテ枚数の30％×10,000円／月の計算方式</div>
         </div>
         
         <div class="result-item">
@@ -342,6 +347,7 @@
   const workDays = parseInt(document.getElementById('work-days').value) || 0;
   const treatmentTime = parseInt(document.getElementById('treatment-time').value) || 0;
   const fatigueLevel = parseInt(document.getElementById('fatigue-level').value) || 0;
+  const medicalCases = parseInt(document.getElementById('medical-cases').value) || 0;
 
   const newPrice = currentPrice * 2;
   const newPatientCount = patientCount / 2;
@@ -351,19 +357,19 @@
   const repeatRevenue = monthlySales * 0.8;
   const estimatedFatigue = fatigueLevel * 0.5;
   
-  // ③物販サブスク金額を追加
-  const productSubscription = 34800;
+  // 新たに追加：カルテ枚数×30％×10,000
+  const productRevenue = medicalCases * 0.3 * 10000;
   
-  // ⑤合計（月商 + リピート収益 + 物販サブスク）
-  const totalRevenue = monthlySales + repeatRevenue + productSubscription;
+  const totalRevenue = monthlySales + repeatRevenue + productRevenue;
 
   document.getElementById('monthly-sales').textContent = monthlySales.toLocaleString();
   document.getElementById('free-time').textContent = freeTime.toFixed(0);
   document.getElementById('repeat-revenue').textContent = repeatRevenue.toLocaleString();
+  document.getElementById('product-revenue').textContent = productRevenue.toLocaleString(); // ③の結果
   document.getElementById('estimated-fatigue').textContent = estimatedFatigue.toFixed(1);
   document.getElementById('total-revenue').textContent = totalRevenue.toLocaleString();
 }
-  
+     
     document.addEventListener('DOMContentLoaded', function() {
       const inputs = document.querySelectorAll('input[type="number"]');
       inputs.forEach(input => {

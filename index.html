@@ -294,7 +294,7 @@
         </div>
         
         <div class="result-item">
-          <strong>⑤現在の月商とリピート収益の合計</strong>
+          <strong>⑤現在の月商とリピート収益の合計（物販サブスク含む）</strong>
           <div class="result-value">¥<span id="total-revenue">4,500,000</span></div>
         </div>
       </div>
@@ -337,28 +337,33 @@
     };
 
     function calculateResults() {
-      const currentPrice = parseInt(document.getElementById('current-price').value) || 0;
-      const patientCount = parseInt(document.getElementById('patient-count').value) || 0;
-      const workDays = parseInt(document.getElementById('work-days').value) || 0;
-      const treatmentTime = parseInt(document.getElementById('treatment-time').value) || 0;
-      const fatigueLevel = parseInt(document.getElementById('fatigue-level').value) || 0;
+  const currentPrice = parseInt(document.getElementById('current-price').value) || 0;
+  const patientCount = parseInt(document.getElementById('patient-count').value) || 0;
+  const workDays = parseInt(document.getElementById('work-days').value) || 0;
+  const treatmentTime = parseInt(document.getElementById('treatment-time').value) || 0;
+  const fatigueLevel = parseInt(document.getElementById('fatigue-level').value) || 0;
 
-      const newPrice = currentPrice * 2;
-      const newPatientCount = patientCount / 2;
-      const monthlySales = newPrice * newPatientCount * workDays;
-      const freeTimePerDay = (patientCount - newPatientCount) * (treatmentTime / 60);
-      const freeTime = freeTimePerDay * workDays;
-      const repeatRevenue = monthlySales * 0.8;
-      const estimatedFatigue = fatigueLevel * 0.5;
-      const totalRevenue = monthlySales + repeatRevenue;
+  const newPrice = currentPrice * 2;
+  const newPatientCount = patientCount / 2;
+  const monthlySales = newPrice * newPatientCount * workDays;
+  const freeTimePerDay = (patientCount - newPatientCount) * (treatmentTime / 60);
+  const freeTime = freeTimePerDay * workDays;
+  const repeatRevenue = monthlySales * 0.8;
+  const estimatedFatigue = fatigueLevel * 0.5;
+  
+  // ③物販サブスク金額を追加
+  const productSubscription = 34800;
+  
+  // ⑤合計（月商 + リピート収益 + 物販サブスク）
+  const totalRevenue = monthlySales + repeatRevenue + productSubscription;
 
-      document.getElementById('monthly-sales').textContent = monthlySales.toLocaleString();
-      document.getElementById('free-time').textContent = freeTime.toFixed(0);
-      document.getElementById('repeat-revenue').textContent = repeatRevenue.toLocaleString();
-      document.getElementById('estimated-fatigue').textContent = estimatedFatigue.toFixed(1);
-      document.getElementById('total-revenue').textContent = totalRevenue.toLocaleString();
-    }
-
+  document.getElementById('monthly-sales').textContent = monthlySales.toLocaleString();
+  document.getElementById('free-time').textContent = freeTime.toFixed(0);
+  document.getElementById('repeat-revenue').textContent = repeatRevenue.toLocaleString();
+  document.getElementById('estimated-fatigue').textContent = estimatedFatigue.toFixed(1);
+  document.getElementById('total-revenue').textContent = totalRevenue.toLocaleString();
+}
+  
     document.addEventListener('DOMContentLoaded', function() {
       const inputs = document.querySelectorAll('input[type="number"]');
       inputs.forEach(input => {

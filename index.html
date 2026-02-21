@@ -183,6 +183,28 @@
       border: 2px solid #2E5B8A;
     }
     
+    .result-item-highlight {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border-left: 6px solid #ff9800;
+      box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
+    }
+    
+    .result-item-highlight strong {
+      display: block;
+      color: #e65100;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    
+    .result-item-highlight .result-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff6f00;
+    }
+    
     .explanation-section {
       padding: 40px 30px;
       background: #f8f9fa;
@@ -251,7 +273,7 @@
         
         <div class="result-item">
           <strong>現在の施術単価の月売上</strong>
-          <div class="result-value">¥<span id="monthly-sales">2,500,000</span></div>
+          <div class="result-value">ﾥ<span id="monthly-sales">2,500,000</span></div>
         </div>
         
         <div class="result-item">
@@ -262,7 +284,7 @@
         
         <div class="result-item">
           <strong>月売上とリピート収益の合計</strong>
-          <div class="result-value">¥<span id="current-plus-repeat">3,500,000</span></div>
+          <div class="result-value">ﾥ<span id="current-plus-repeat">3,500,000</span></div>
         </div>
 
         <div class="section-divider">
@@ -300,9 +322,14 @@
         </div>
         
         <div class="result-item">
-          <strong>未来予測の収益イメージ</strong>
+          <strong>未来の予測月商イメージ</strong>
           <div class="result-value">¥<span id="total-revenue">4,576,800</span></div>
-          <div class="result-description">高単価メニューを導入した金額</div>
+          <div class="result-description">①+②+③の合計</div>
+        </div>
+
+        <div class="result-item-highlight">
+          <strong>現在地と未来予測の合計</strong>
+          <div class="result-value">ﾥ<span id="grand-total">8,076,800</span></div>
         </div>
       </div>
     </div>
@@ -382,6 +409,9 @@
       // 未来の予測月商イメージ（① + ② + ③）
       const totalRevenue = premiumRevenue + premiumRepeatRevenue + productRevenue;
 
+      // 現在地と未来予測の合計
+      const grandTotal = currentPlusRepeat + totalRevenue;
+
       // 結果を表示
       document.getElementById('monthly-sales').textContent = monthlySales.toLocaleString();
       document.getElementById('repeat-revenue').textContent = repeatRevenue.toLocaleString();
@@ -392,6 +422,7 @@
       document.getElementById('free-time').textContent = freeTime.toFixed(0);
       document.getElementById('estimated-fatigue').textContent = estimatedFatigue.toFixed(1);
       document.getElementById('total-revenue').textContent = totalRevenue.toLocaleString();
+      document.getElementById('grand-total').textContent = grandTotal.toLocaleString();
     }
      
     document.addEventListener('DOMContentLoaded', function() {
